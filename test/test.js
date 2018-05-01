@@ -34,13 +34,26 @@ function findValidWords(ids, words) {
         if (word.numberOfTimesLearned > 0) {
             wordsToReturn.push(word.id);
         }
-    })
+    });
+    return wordsToReturn;
+}
+
+function selectThree(words) {
+    const threeIds = [];
+    while(threeIds.length < 3) {
+        const randomId = words[Math.floor(Math.random() * words.length)];
+        if (threeIds.indexOf(randomId) === -1) {
+            threeIds.push(randomId);
+        }
+    }
+    return threeIds
 }
 
 function wholeThing(ids, words) {
-    console.log(ids);
     const updatedWords = updateWords(ids, words);
-    findValidWords(ids, updatedWords);
+    const validWords = findValidWords(ids, updatedWords);
+    const threeIds = selectThree(validWords);
+    console.log(threeIds);
 }
 
 wholeThing(data.ids, data.words);
